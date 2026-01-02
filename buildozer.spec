@@ -1,34 +1,18 @@
-name: Build Android APK
+[app]
+title = Search App
+package.name = searchapp
+package.domain = org.som3h
 
-on:
-  push:
-    branches: [ "main" ]
+source.dir = .
+source.include_exts = py
 
-jobs:
-  build:
-    runs-on: ubuntu-22.04
+requirements = python3,kivy
 
-    steps:
-    - uses: actions/checkout@v4
+orientation = portrait
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+android.permissions = INTERNET
 
-    - name: Install dependencies
-      run: |
-        sudo apt update
-        sudo apt install -y openjdk-17-jdk zip unzip git
-        pip install --upgrade pip
-        pip install buildozer cython
+android.api = 33
+android.minapi = 21
 
-    - name: Build APK
-      run: |
-        buildozer android debug
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: apk
-        path: bin/*.apk
+fullscreen = 0
