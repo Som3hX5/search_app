@@ -2,6 +2,7 @@
 title = Search App
 package.name = searchapp
 package.domain = org.som3h
+version = 0.1
 
 source.dir = .
 source.include_exts = py
