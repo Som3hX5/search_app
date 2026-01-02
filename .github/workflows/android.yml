@@ -1,4 +1,4 @@
-name: Build Android APK (Docker)
+name: Build Android APK (Docker - Stable)
 
 on:
   push:
@@ -9,17 +9,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Build APK using Buildozer Docker
+    - name: Build APK using stable Buildozer container
       run: |
         docker run --rm \
+          -e BUILDOZER_ALLOW_ROOT=1 \
+          -e ANDROIDAPI=33 \
+          -e ANDROIDMINAPI=21 \
           -v "$PWD":/home/user/app \
-          kivy/buildozer:latest \
-          buildozer android debug --allow-root
+          kivy/buildozer:stable \
+          buildozer android debug
 
-    - name: Upload APK
+    - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: apk
+        name: android-apk
         path: bin/*.apk
