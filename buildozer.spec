@@ -7,7 +7,7 @@ version = 0.1
 source.dir = .
 source.include_exts = py
 
-requirements = python3,kivy
+requirements = python3,kivy,pyjnius==1.6.1
 
 orientation = portrait
 
