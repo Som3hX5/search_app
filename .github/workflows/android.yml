@@ -1,4 +1,4 @@
-name: Build Android APK (Docker - Final)
+name: Build Android APK (Docker - Final Fixed)
 
 on:
   push:
@@ -12,10 +12,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Build APK using Buildozer Docker
+    - name: Build APK using Buildozer Docker (non-root)
       run: |
         docker run --rm \
-          -e BUILDOZER_ALLOW_ROOT=1 \
+          --user 1000:1000 \
           -e CI=1 \
           -v "$PWD":/home/user/app \
           kivy/buildozer:latest \
